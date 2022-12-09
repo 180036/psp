@@ -6,7 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 
-public class DataTextServer {
+public class DataTextServer{
 
 	public static final int PORT = 3001;
 	public static void main(String[] args) {
