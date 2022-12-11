@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 
 import server.DataTextServer;
 
-public class DataTextClient{
+public class DataTextClient {
 
 	public static void main(String[] args) {
 		try {
