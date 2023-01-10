@@ -20,7 +20,7 @@ public class DataTextClient {
 			Socket sock = new Socket();
 			
 			//Perparo la direccion del serivdor. IP y ppuerto
-			SocketAddress sockAddr= new InetSocketAddress("localhost", server.DateTextServer.PORT);
+			SocketAddress sockAddr= new InetSocketAddress("192.168.101.100", 3001);
 			
 			//Intento la conexion, estableciendo un timeout de 6 segundos.
 			sock.connect(sockAddr,6000);
