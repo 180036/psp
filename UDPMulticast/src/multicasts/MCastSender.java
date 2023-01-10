@@ -14,7 +14,7 @@ public class MCastSender {
 		
 		InetAddress ipGrupo = InetAddress.getByName("224.0.0.1");
 		
-		String mensaje = "Alguien da clases privadas de procesos??";
+		String mensaje = "Hola :D";
 		DatagramPacket info = new DatagramPacket(mensaje.getBytes(), mensaje.getBytes().length, ipGrupo, 3000);	
 		
 		socket.send(info);

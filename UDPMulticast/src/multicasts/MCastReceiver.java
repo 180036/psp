@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.NetworkInterface;
 
 public class MCastReceiver {
 	
@@ -12,9 +13,9 @@ public class MCastReceiver {
 //														  |			
 		MulticastSocket mCastSock = new MulticastSocket(3000);
 //														Ip 
-//														|		
 		InetAddress ipGrupo = InetAddress.getByName("224.0.0.1");
-		
+	    mCastSock.setNetworkInterface(NetworkInterface.getByName("eth1"));											
+
 		mCastSock.joinGroup(ipGrupo); //unir a ese grupo en especifico.
 		while (true) {
 		byte[] arrayDeBytes = new byte[1000];
