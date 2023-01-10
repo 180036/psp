@@ -13,6 +13,18 @@ public class Emisor extends Thread{
 		this.sock = sock;
 		this.listaMensajes = listaMensajes;
 	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+		//Inicializar la salida. object output stream
+		//while true
+			// esperar notificacion de ultimo mensaje añadido a la lista (sincronizadamente)
+			// coger el ultimo mensaje (sincronizadamente)
+			// enviarlo
+	}
+	
 	
 
 
