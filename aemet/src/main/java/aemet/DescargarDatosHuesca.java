@@ -7,21 +7,21 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class DescargarDatos {
+public class DescargarDatosHuesca {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		//Para que quede mas visual.
 		String server = "https://opendata.aemet.es/opendata/";
 		String apikey = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTAxNDZAaWVzc2llcnJhZGVndWFyYS5jb20iLCJqdGkiOiJkMGI0NWRhNi1lZmYzLTQwZDYtYmZkZi05MTE0ZThiZTg0ODAiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY3NTE1NDYzNSwidXNlcklkIjoiZDBiNDVkYTYtZWZmMy00MGQ2LWJmZGYtOTExNGU4YmU4NDgwIiwicm9sZSI6IiJ9.NW7CYlKvOy6mVtZWF8WoGWgbKgD4cGcRB44kaqelGhM";
-		String endpoint = "api/observacion/convencional/todas";
+		String endpoint = "api/observacion/convencional/datos/estacion/9901X";
 		
 		HttpClient cliente = HttpClient.newHttpClient();
 		HttpRequest req = HttpRequest.newBuilder().uri(URI.create(server + endpoint + "?api_key=" + apikey)).GET().build();
@@ -41,25 +41,17 @@ public class DescargarDatos {
 		HttpRequest reqDatos = HttpRequest.newBuilder().uri(URI.create(urlDatos)).GET().build();
 		HttpResponse<String> resDatos = cliente.send(reqDatos, HttpResponse.BodyHandlers.ofString());
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		df.setTimeZone(TimeZone.getTimeZone("UTC"));
-		mapper.setDateFormat(df);
-		
 		//Mapeamos los datos en una lista.
-		List<EstacionMeteo> listaEstaciones = mapper.readValue(resDatos.body(), new TypeReference<List<EstacionMeteo>>() {});
+		List<EstacionMeteo> observacionesHuesca = mapper.readValue(resDatos.body(), new TypeReference<List<EstacionMeteo>>() {});
 		
-		System.out.println(listaEstaciones.get(0).getIdema());
-		System.out.println(listaEstaciones.get(0).getUbi());
-		System.out.println(listaEstaciones.get(0).getTa());
-
 		
-		HashMap<String, EstacionMeteo> mapaEstaciones = new HashMap<String, EstacionMeteo>();
-		for(EstacionMeteo estacionMeteo : listaEstaciones) {
-			mapaEstaciones.put(estacionMeteo.getIdema(), estacionMeteo); //El propio objeto tiene la clave
+		for(EstacionMeteo estacionMeteo : observacionesHuesca) {
+			System.out.println(estacionMeteo.getFint() + " " + estacionMeteo.getTa());
+			
 			
 		}
 		//coger el valor deseado filtrado por el idioma de Huesca(9901X)
-		System.out.println(mapaEstaciones.get("9901X"));
+
 		
 		
 		
